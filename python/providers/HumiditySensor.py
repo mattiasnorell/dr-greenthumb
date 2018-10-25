@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+from sensors.humidity import Humidity
+import os.path
+import Adafruit_DHT
+from SqliteDatabase import SqliteDatabase
+
+class HumiditySensor:
+	
+	def __init__(self):
+		self.sqliteDatabase = SqliteDatabase()
+
+	def getSensorValue(self, serialNumber):
+		sensorType = Adafruit_DHT.DHT22
+		humidity, temperature = Adafruit_DHT.read_retry(sensorType, serialNumber)
+
+		return humidity
+
+	def getSensors(self):
+		return self.readSensors()
+
+	def readSensors(self):
+		sensors = []
+
+		self.sqliteDatabase.query ("""SELECT * from Sensors where SensorType = 'humidity'""","")
+
+		for reading in self.sqliteDatabase.fetchall():
+			sensorId = reading[0]
+			sensorSerialNumber = str(reading[1])
+			sensorName = str(reading[2])
+			sensorType = str(reading[3])
+			sensorMinValue = reading[4]
+			sensorMaxValue = reading[5]
+
+			value = self.getSensorValue(sensorSerialNumber)
+
+			with self.sqliteDatabase.conn:
+				if sensorType == "humidity":
+					sensor = Humidity(sensorId, sensorSerialNumber, sensorName, sensorType, value, sensorMinValue, sensorMaxValue)
+					sensors.append(sensor)
+
+		return sensors

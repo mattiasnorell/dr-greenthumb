@@ -1,0 +1,15 @@
+database:
+  path: ../db/greenhouse.db
+
+backup:
+  database: ../backup/
+  max_database_backups: 5
+
+camera:
+  mode: file #ftp | file | live
+  path: /data/websites/greenhouse.local/www/snapshots/snapshot.jpg
+  username: username
+  password: password
+
+enviroment:
+  debug: false
