@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 import yaml
-from sensors.settings import Settings as SettingsModel
-from Singleton import Singleton
+from core.models.settings import Settings as SettingsModel
+from core.singleton import Singleton
 
 class Settings(metaclass=Singleton):
 	

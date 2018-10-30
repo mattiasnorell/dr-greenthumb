@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 import datetime
-from CameraManager import CameraManager
+from managers.camera import CameraManager
 
 class TakePhoto:
 

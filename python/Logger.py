@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 
-from Singleton import Singleton
+from core.singleton import Singleton
 from connectors.apiconnector import ApiConnector
 
 class Logger(metaclass=Singleton):

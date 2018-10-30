@@ -1,6 +1,6 @@
 import requests
 from flask import abort
-from providers.Settings import Settings 
+from core.settings import Settings 
 
 class ApiConnector:
 

@@ -3,16 +3,15 @@
 import schedule
 import time
 import datetime
-from providers.Mock import Mock as MockProvider
+
 from scheduledjobs.mock import Mock as MockJob
-from scheduledjobs.backupdatabase import BackupDatabase
 from scheduledjobs.checktemperature import CheckTemperature
-#from scheduledjobs.takephoto import TakePhoto
+from scheduledjobs.takephoto import TakePhoto
 from scheduledjobs.checkwaterlevel import CheckWaterLevel
 from scheduledjobs.checkhumidity import CheckHumidity
 from scheduledjobs.checklight import CheckLight
 
-from providers.Settings import Settings
+from core.settings import Settings
 from Logger import Logger
 
 print("\nHello, I'm Dr. Greenthumb - version: 0.1")
@@ -40,4 +39,4 @@ logger.log("Application started at {}".format(datetime.datetime.now()))
 
 while True:
     schedule.run_pending()
-    time.sleep(10)
+    time.sleep(60)
