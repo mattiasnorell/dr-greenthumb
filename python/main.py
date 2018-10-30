@@ -8,8 +8,8 @@ from scheduledjobs.mock import Mock as MockJob
 from scheduledjobs.backupdatabase import BackupDatabase
 from scheduledjobs.checktemperature import CheckTemperature
 #from scheduledjobs.takephoto import TakePhoto
-#from scheduledjobs.checkwaterlevel import CheckWaterLevel
-#from scheduledjobs.checkhumidity import CheckHumidity
+from scheduledjobs.checkwaterlevel import CheckWaterLevel
+from scheduledjobs.checkhumidity import CheckHumidity
 
 from providers.Settings import Settings
 from Logger import Logger
@@ -24,14 +24,14 @@ print("\n_Setting up schedule_")
 check_temperature = CheckTemperature()
 #backup_database = BackupDatabase()
 #take_photo = TakePhoto()
-#check_waterlevel = CheckWaterLevel()
-#check_humidity = CheckHumidity()
+check_waterlevel = CheckWaterLevel()
+check_humidity = CheckHumidity()
 
-schedule.every(5).seconds.do(check_temperature.run)
+schedule.every(10).minutes.do(check_temperature.run)
 #schedule.every(10).minutes.do(take_photo.run)
 #schedule.every().day.do(backup_database.run)
-#schedule.every(30).minutes.do(check_waterlevel.run)
-#schedule.every(30).minutes.do(check_humidity.run)
+schedule.every(10).seconds.do(check_waterlevel.run)
+schedule.every(10).minutes.do(check_humidity.run)
 
 print("\nSetup complete!\n")
 

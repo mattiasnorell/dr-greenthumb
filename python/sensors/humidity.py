@@ -1,5 +1,9 @@
-from SensorBase import SensorBase
-
-class Humidity(SensorBase):
+class Humidity():
 	def __init__(self, id, serialNumber, name, type, value, min, max):
-		super().__init__(self, id, serialNumber, name, type, value, min, max)
+		self.id = id
+		self.serialNumber = serialNumber
+		self.name = name
+		self.type = type
+		self.value = value
+		self.min = min
+		self.max = max

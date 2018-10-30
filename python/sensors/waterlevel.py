@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 
-class WaterLevel:
-	
-	def __init__(self, connection):
-		self.connection = connection
-
-	def GetSensorValue(self):
-		return True
+class Waterlevel:
+	def __init__(self, id, serialNumber, name, type, value, min, max):
+		self.id = id
+		self.serialNumber = serialNumber
+		self.name = name
+		self.type = type
+		self.value = value
+		self.min = min
+		self.max = max

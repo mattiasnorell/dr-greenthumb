@@ -24,7 +24,8 @@ class TemperatureSensor:
 			text = tfile.read()
 			tfile.close()
 			return text
-		return ""
+
+		return None
 	
 	def getSensors(self):
 		return self.readSensors()
@@ -32,23 +33,26 @@ class TemperatureSensor:
 	def readSensors(self):
 		sensors = []
 
-		apiSensors = self.api.get("/sensors/type/temp")
+		result = self.api.get("/sensors/type/temp")
 
-		for sensor in apiSensors:
+		if result['status'] != 200:
+			return sensors
+
+		for sensor in result['data']:
 			sensorId = sensor['Id']
 			sensorSerialNumber = sensor['SensorId']
 			sensorName = sensor['SensorName']
 			sensorType = sensor['SensorType']
 			sensorMinValue = sensor['MinValue']
 			sensorMaxValue = sensor['MaxValue']
-			text = self.getSensorConfigFile(sensorSerialNumber)  
+			sensorConfiguration = self.getSensorConfigFile(sensorSerialNumber)  
 
-			if text == "":
+			if sensorConfiguration == None:
 				message = "Sensor not found: {}, S/N: {}".format(sensorName, sensorSerialNumber)
 				self.logger.log(message)
 				continue
 
-			temp = self.parseTemperature(text)
+			temp = self.parseTemperature(sensorConfiguration)
 			sensor = Temperature(sensorId, sensorSerialNumber, sensorName, sensorType, temp, sensorMinValue, sensorMaxValue)
 			sensors.append(sensor)
 

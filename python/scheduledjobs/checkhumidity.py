@@ -11,10 +11,9 @@ class CheckHumidity(JobBase):
 
     def run(self):
         for sensor in self.sensor.getSensors():
-            print "Sensor: ", sensor.name
-            print "Humidity: ", sensor.value , "°C (max: ", sensor.max ,"°C)\n"
+            print("CheckHumidity :: {} Sensor: {}% (max: {}%)".format(sensor.name, sensor.value, sensor.max))
 
-            self.api.post("sensors/%s/data" % (sensor.id), {value: sensor.value})
+            self.api.post("/sensors/%s/data" % (sensor.id), {'value': sensor.value})
             
             if sensor.value > sensor.max:
                 message = "Sensor " + sensor.name + " is above max value"
