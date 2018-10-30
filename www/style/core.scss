@@ -1,0 +1,48 @@
+body{
+	background-color: #eaedf2;
+	font-family: 'Open Sans', sans-serif;
+
+ 	-webkit-touch-callout: none; /* iOS Safari */
+ 	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+ 	-khtml-user-select: none;    /* Konqueror */
+ 	-moz-user-select: none;      /* Firefox */
+ 	-ms-user-select: none;       /* IE/Edge */
+	user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+
+    margin: 10px 0 0 0;
+}
+
+a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.container{
+	width: 960px;
+	margin: 0 auto;
+}
+
+.col-small, .col-medium, .col-large{
+	float:left;
+}
+
+.box-shadow{
+	-webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.5);
+	box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.5);
+}
+
+.img-circle{
+	border-radius: 100%;
+}
+
+.img-responsive{
+	max-width: 100%;
+}
+
+@media screen and (max-width: 640px) {
+	.container{
+		width: 100%;
+	}
+}

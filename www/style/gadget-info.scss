@@ -1,0 +1,52 @@
+/* WIDGET OVERRIDES */
+.gadget-info .gadget-info-tab {
+	padding: 20px;
+}
+
+.gadget.gadget-info  .gadget-content{
+	color: #666;
+	max-height:none;
+	background: #fff;
+	min-height: 0;
+	padding: 0;
+}
+
+.gadget.gadget-info  .gadget-content h2{
+	font-size: 18px;
+	font-weight: 600;
+	padding: 0;
+	margin: 10px 0 0 0;
+}
+
+.gadget.gadget-info  .gadget-content h3{
+	font-size: 13px;
+	font-weight: 300;
+	padding: 0;
+	margin: 0 0 10px 0;
+}
+
+.gadget.gadget-info  .gadget-content img{
+	max-width: 100%;
+}
+
+.gadget.gadget-info .gadget-content table{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+}
+
+
+.gadget.gadget-info .gadget-content table td{
+	font-size: 12px;
+	line-height: 20px;
+	border-bottom: 1px solid rgba(255,255,255,.5);
+}
+
+.gadget.gadget-info .gadget-content table td:nth-child(1){
+	text-align: left;
+}
+
+.gadget.gadget-info .gadget-content table td:nth-child(2){
+	text-align: right;
+}

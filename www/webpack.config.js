@@ -1,6 +1,3 @@
-/* === dont forget to import scss to main.js file === */
-/* ===> import './main.scss'; <=== */
-
 var path = require("path");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
