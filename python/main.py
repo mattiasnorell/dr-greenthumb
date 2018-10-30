@@ -10,6 +10,7 @@ from scheduledjobs.checktemperature import CheckTemperature
 #from scheduledjobs.takephoto import TakePhoto
 from scheduledjobs.checkwaterlevel import CheckWaterLevel
 from scheduledjobs.checkhumidity import CheckHumidity
+from scheduledjobs.checklight import CheckLight
 
 from providers.Settings import Settings
 from Logger import Logger
@@ -22,14 +23,14 @@ logger = Logger()
 
 print("\n_Setting up schedule_")
 check_temperature = CheckTemperature()
-#backup_database = BackupDatabase()
+check_light = CheckLight()
 #take_photo = TakePhoto()
 check_waterlevel = CheckWaterLevel()
 check_humidity = CheckHumidity()
 
 schedule.every(10).minutes.do(check_temperature.run)
 #schedule.every(10).minutes.do(take_photo.run)
-#schedule.every().day.do(backup_database.run)
+schedule.every(5).seconds.do(check_light.run)
 schedule.every(10).seconds.do(check_waterlevel.run)
 schedule.every(10).minutes.do(check_humidity.run)
 
