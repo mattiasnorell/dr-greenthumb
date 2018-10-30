@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*- 
 
 from Logger import Logger
-from SqliteDatabase import SqliteDatabase
+from connectors.apiconnector import ApiConnector
 
 class JobBase:
         def __init__(self):
                 print("Wiring", self.__class__.__name__)
-                self.sqliteDatabase = SqliteDatabase()
+                self.api = ApiConnector()
                 self.logger = Logger()

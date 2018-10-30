@@ -14,8 +14,9 @@ class CheckHumidity(JobBase):
             print "Sensor: ", sensor.name
             print "Humidity: ", sensor.value , "°C (max: ", sensor.max ,"°C)\n"
 
-            self.sqliteDatabase.query ("INSERT INTO SensorData (SensorId, Datetime, SensorValue) VALUES(?,datetime('now','localtime'),?)",(sensorId, value))
-
+            self.api.post("sensors/%s/data" % (sensor.id), {value: sensor.value})
+            
             if sensor.value > sensor.max:
-                self.logger.log("Sensor " + sensor.name + " is above max value\n")
+                message = "Sensor " + sensor.name + " is above max value"
+                self.api.post("log" % (sensor.id), {message: message})
                 break

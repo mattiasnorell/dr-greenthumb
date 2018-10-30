@@ -13,13 +13,15 @@ class CheckTemperature(JobBase):
 
     def run(self):
         
-        for sensor in self.temperatureSensors.getSensors():
+        sensors = self.temperatureSensors.getSensors()
+        for sensor in sensors:
             print("Sensor: ", sensor.name)
-            print("Temperature: ", sensor.temperature , "°C (max: ", sensor.max ,"°C)\n")
+            print("Temperature: ", sensor.value , "°C (max: ", sensor.max ,"°C)\n")
 
-            self.sqliteDatabase.query("INSERT INTO SensorData (SensorId,Datetime, SensorValue) VALUES(?,datetime('now','localtime'),?)",(sensor.id, sensor.temperature))
+            self.api.post("/sensors/%s/data" % (sensor.id), {'value': sensor.value})
 
-            if sensor.temperature > sensor.max:
-                self.logger.log("Sensor " + sensor.name + " is above max value\n")
+            if sensor.value > sensor.max:
+                message = "Sensor {} is above max value".format(sensor.name)
+                self.logger.log(message)
                 #fanManager.runFan(30)
                 break

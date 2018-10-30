@@ -12,27 +12,24 @@ from scheduledjobs.checktemperature import CheckTemperature
 #from scheduledjobs.checkhumidity import CheckHumidity
 
 from providers.Settings import Settings
-from SqliteDatabase import SqliteDatabase
 from Logger import Logger
 
 print("\nHello, I'm Dr. Greenthumb - version: 0.1")
 
 print("\n_Setting up core_")
 settings = Settings() 
-database = SqliteDatabase()
 logger = Logger()
 
 print("\n_Setting up schedule_")
 check_temperature = CheckTemperature()
-backup_database = BackupDatabase()
+#backup_database = BackupDatabase()
 #take_photo = TakePhoto()
 #check_waterlevel = CheckWaterLevel()
 #check_humidity = CheckHumidity()
 
-schedule.every(10).seconds.do(check_temperature.run)
+schedule.every(5).seconds.do(check_temperature.run)
 #schedule.every(10).minutes.do(take_photo.run)
-schedule.every().day.do(backup_database.run)
-
+#schedule.every().day.do(backup_database.run)
 #schedule.every(30).minutes.do(check_waterlevel.run)
 #schedule.every(30).minutes.do(check_humidity.run)
 

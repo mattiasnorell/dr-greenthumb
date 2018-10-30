@@ -3,12 +3,12 @@
 from sensors.humidity import Humidity
 import os.path
 import Adafruit_DHT
-from SqliteDatabase import SqliteDatabase
+from connectors.apiconnector import ApiConnector
 
 class HumiditySensor:
 	
 	def __init__(self):
-		self.sqliteDatabase = SqliteDatabase()
+		self.api = ApiConnector()
 
 	def getSensorValue(self, serialNumber):
 		sensorType = Adafruit_DHT.DHT22
@@ -22,21 +22,22 @@ class HumiditySensor:
 	def readSensors(self):
 		sensors = []
 
-		self.sqliteDatabase.query ("""SELECT * from Sensors where SensorType = 'humidity'""","")
+		sensors = self.api.get("/sensors/type/humidity")
 
-		for reading in self.sqliteDatabase.fetchall():
-			sensorId = reading[0]
-			sensorSerialNumber = str(reading[1])
-			sensorName = str(reading[2])
-			sensorType = str(reading[3])
-			sensorMinValue = reading[4]
-			sensorMaxValue = reading[5]
+		for sensor in sensors:
+			print(sensor)
+		#	sensorId = reading[0]
+		#	sensorSerialNumber = str(reading[1])
+		#	sensorName = str(reading[2])
+		#	sensorType = str(reading[3])
+		#	sensorMinValue = reading[4]
+		#	sensorMaxValue = reading[5]
 
-			value = self.getSensorValue(sensorSerialNumber)
+		#	value = self.getSensorValue(sensorSerialNumber)
 
-			with self.sqliteDatabase.conn:
-				if sensorType == "humidity":
-					sensor = Humidity(sensorId, sensorSerialNumber, sensorName, sensorType, value, sensorMinValue, sensorMaxValue)
-					sensors.append(sensor)
+		#	with self.sqliteDatabase.conn:
+		#		if sensorType == "humidity":
+		#			sensor = Humidity(sensorId, sensorSerialNumber, sensorName, sensorType, value, sensorMinValue, sensorMaxValue)
+		#			sensors.append(sensor)
 
 		return sensors

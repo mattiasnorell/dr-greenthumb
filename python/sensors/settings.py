@@ -3,13 +3,13 @@
 
 class Settings:
 	def __init__(self, config):
-		self.database = DatabaseSettings(config["database"])
+		self.api = ApiSettings(config["api"])
 		self.backup = BackupSettings(config["backup"]) 
 		self.enviroment = EnviromentSettings(config["enviroment"]) 
 
-class DatabaseSettings:
+class ApiSettings:
 	def __init__(self, config):
-		self.path = config["path"]
+		self.basepath = config["basepath"]
 
 class BackupSettings:
 	def __init__(self, config):

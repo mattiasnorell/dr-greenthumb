@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
-from SqliteDatabase import SqliteDatabase
+from connectors.apiconnector import ApiConnector
 from sensors.temperature import Temperature
 import os.path
+from Logger import Logger
 
 class TemperatureSensor:
 	
 	def __init__(self):
-		self.sqliteDatabase = SqliteDatabase()
+		self.api = ApiConnector()
+		self.logger = Logger()
 
 	def parseTemperature(self, input):
 		secondline = input.split("\n")[1]
@@ -30,26 +32,24 @@ class TemperatureSensor:
 	def readSensors(self):
 		sensors = []
 
-		self.sqliteDatabase.query("""SELECT * from Sensors where SensorType = 'temp'""","")
+		apiSensors = self.api.get("/sensors/type/temp")
 
-		for reading in self.sqliteDatabase.curs.fetchall():
-			sensorId = reading[0]
-			sensorSerialNumber = str(reading[1])
-			sensorName = str(reading[2])
-			sensorType = str(reading[3])
-			sensorMinValue = reading[4]
-			sensorMaxValue = reading[5]
+		for sensor in apiSensors:
+			sensorId = sensor['Id']
+			sensorSerialNumber = sensor['SensorId']
+			sensorName = sensor['SensorName']
+			sensorType = sensor['SensorType']
+			sensorMinValue = sensor['MinValue']
+			sensorMaxValue = sensor['MaxValue']
 			text = self.getSensorConfigFile(sensorSerialNumber)  
 
 			if text == "":
-				print("Sensor not found: ", sensorName, ", S/N:", sensorSerialNumber)
+				message = "Sensor not found: {}, S/N: {}".format(sensorName, sensorSerialNumber)
+				self.logger.log(message)
 				continue
 
 			temp = self.parseTemperature(text)
-
-			with self.sqliteDatabase.conn:
-				if sensorType == "temp":
-					sensor = Temperature(sensorId, sensorSerialNumber, sensorName, sensorType, temp, sensorMinValue, sensorMaxValue)
-					sensors.append(sensor)
+			sensor = Temperature(sensorId, sensorSerialNumber, sensorName, sensorType, temp, sensorMinValue, sensorMaxValue)
+			sensors.append(sensor)
 
 		return sensors

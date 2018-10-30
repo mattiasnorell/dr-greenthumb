@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 class MoistureSensor:
 	
 	def __init__(self, connection):
-		self.connection = connection
+		self.api = apiconnector
 
 	def getSensorValue(self, serialNumber):
 		GPIO.setmode(GPIO.BCM)
@@ -20,11 +20,9 @@ class MoistureSensor:
 	def readSensors(self):
 		sensors = []
 
-		curs = self.connection.cursor()
+		sensors = self.api.get("/sensors/type/moisture")
 
-		curs.execute ("""SELECT * from Sensors where SensorType = 'moisture'""")
-
-		for reading in curs.fetchall():
+		for reading in sensors:
 			sensorId = reading[0]
 			sensorSerialNumber = int(reading[1])
 			sensorName = str(reading[2])
@@ -33,9 +31,9 @@ class MoistureSensor:
 			sensorMaxValue = reading[5]
 			value = self.getSensorValue(sensorSerialNumber)  
 
-			with self.connection:
-				if sensorType == "moisture":
-					sensor = Moisture(sensorId, sensorSerialNumber, sensorName, sensorType, value, sensorMinValue, sensorMaxValue)
-					sensors.append(sensor)
+		#	with self.connection:
+		#		if sensorType == "moisture":
+		#			sensor = Moisture(sensorId, sensorSerialNumber, sensorName, sensorType, value, sensorMinValue, sensorMaxValue)
+		#			sensors.append(sensor)
 
 		return sensors

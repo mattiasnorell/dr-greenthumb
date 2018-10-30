@@ -1,6 +1,9 @@
-from sensors.sensorbase import SensorBase
-
-class Temperature(SensorBase):
-	def __init__(self, id, serialNumber, name, type, temperature, min, max):
-		super().__init__(self, id, serialNumber, name, type, temperature, min, max)
-		self.temperature = temperature
+class Temperature:
+	def __init__(self, id, serialNumber, name, type, value, min, max):
+		self.id = id
+		self.serialNumber = serialNumber
+		self.name = name
+		self.type = type
+		self.value = value
+		self.min = min
+		self.max = max
