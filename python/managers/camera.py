@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 import time
-from time import sleep
 import datetime
-import os.path
-import sys
 from core.settings import Settings
 
 class CameraManager:
