@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from scheduledjobs.jobbase import JobBase
-from providers.WaterlevelSensor import WaterlevelSensor
+from sensors.WaterlevelSensor import WaterlevelSensor
 
 class CheckWaterLevel(JobBase):
 	

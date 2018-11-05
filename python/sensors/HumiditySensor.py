@@ -1,9 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
-from sensors.humidity import Humidity
 import os.path
 #import Adafruit_DHT
 from connectors.apiconnector import ApiConnector
+
+
+class Humidity():
+	def __init__(self, id, serialNumber, name, type, value, min, max):
+		self.id = id
+		self.serialNumber = serialNumber
+		self.name = name
+		self.type = type
+		self.value = value
+		self.min = min
+		self.max = max
 
 class HumiditySensor:
 	

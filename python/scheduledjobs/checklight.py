@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
-from providers.LightSensor import LightSensor
+from sensors.LightSensor import LightSensor
 from scheduledjobs.jobbase import JobBase
 #from FanManager import FanManager
 import datetime

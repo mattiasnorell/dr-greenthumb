@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
-from providers.TemperatureSensor import TemperatureSensor
+from sensors.TemperatureSensor import TemperatureSensor
 from scheduledjobs.jobbase import JobBase
 #from FanManager import FanManager
 

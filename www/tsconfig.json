@@ -1,8 +1,47 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "strict": true,
-      "module": "es2015",
-      "moduleResolution": "node"
-    }
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es5",
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "strictPropertyInitialization": false,
+    "typeRoots": [
+      "node_modules/@types/",
+      "@types"
+    ],
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.promise",
+      "es6"
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "_helpers/*": [
+        "business/helpers/*"
+      ],
+      "_services/*": [
+        "business/services/*"
+      ],
+      "_models/*": [
+        "business/models/*"
+      ],
+      "_store/*": [
+        "business/store/*"
+      ],
+      "_shared/*": [
+        "views/_shared/*"
+      ]
+    },
+    "outDir": "dist"
+  },
+  "exclude": [
+    "**/dist",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules"
+  ]
 }

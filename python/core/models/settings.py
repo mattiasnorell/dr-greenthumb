@@ -13,3 +13,10 @@ class ApiSettings:
 class EnviromentSettings:
 	def __init__(self, config):
 		self.debug = config["debug"]
+		self.hostIsRaspberryPi = False
+		
+		try:
+  			import RPi.GPIO as gpio
+  			self.hostIsRaspberryPi = True
+		except (ImportError, RuntimeError):
+  			self.hostIsRaspberryPi = False

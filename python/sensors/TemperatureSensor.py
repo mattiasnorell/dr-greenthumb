@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 from connectors.apiconnector import ApiConnector
-from sensors.temperature import Temperature
 import os.path
-from Logger import Logger
+from core.logger import Logger
+
+class Temperature:
+	def __init__(self, id, serialNumber, name, type, value, min, max):
+		self.id = id
+		self.serialNumber = serialNumber
+		self.name = name
+		self.type = type
+		self.value = value
+		self.min = min
+		self.max = max
 
 class TemperatureSensor:
 	

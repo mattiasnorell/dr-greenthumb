@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- 
 
 from scheduledjobs.jobbase import JobBase
-from providers.HumiditySensor import HumiditySensor
+from sensors.HumiditySensor import HumiditySensor
 
 class CheckHumidity(JobBase):
     def __init__(self):

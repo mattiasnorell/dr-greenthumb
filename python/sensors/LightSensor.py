@@ -1,8 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 from connectors.apiconnector import ApiConnector
-from sensors.light import Light
-from Logger import Logger
+from core.logger import Logger
+
+class Light:
+	def __init__(self, id, serialNumber, name, sensorType, value, min, max):
+		self.id = id
+		self.serialNumber = serialNumber
+		self.name = name
+		self.type = sensorType
+		self.value = value
+		self.min = min
+		self.max = max
 
 class LightSensor:
 	

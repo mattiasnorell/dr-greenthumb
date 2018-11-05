@@ -1,19 +1,30 @@
 var path = require("path");
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: "./src/main.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "/dist"
+    publicPath: ""
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        exclude: /node_modules/,
+				include: [ path.join(__dirname, 'src') ]
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: [ ':data-src' ]
+          }
+        }
       },
       {
         test: /\.scss$/,
@@ -29,13 +40,23 @@ module.exports = {
               }    
             ]
           }
-        )
+        ),
+        include: [ path.join(__dirname, 'src/style') ]
       }
     ]
   },
   resolve: {
-      extensions: [".tsx", ".ts", ".js"]
-  },plugins: [ 
-    new ExtractTextPlugin({filename: 'style.css'})
+      extensions: [".tsx", ".ts", ".js"],
+      modules: [ path.resolve(__dirname, 'src'), 'node_modules' ],
+  },
+  plugins: [ 
+    new ExtractTextPlugin({filename: 'style.css'}),
+    new htmlWebpackPlugin({
+      template: './index.html',
+      inject: true,
+      filename: 'index.html',
+      title: 'Dr Greenthumb',
+      chunksSortMode: 'none'
+    }),
   ]
 };

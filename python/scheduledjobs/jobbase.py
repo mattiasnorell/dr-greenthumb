@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 
-from Logger import Logger
+from core.logger import Logger
 from connectors.apiconnector import ApiConnector
 
 class JobBase:
