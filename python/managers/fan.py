@@ -6,16 +6,20 @@ import time
 
 class FanManager:
 	
+	gpioPin = 18
+
 	def __init__(self):
 		self.logger = Logger()
 
-	def runFan(self, runtime = 60):
+	def run(self, runtime = 60):
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setwarnings(False)
-		GPIO.setup(18,GPIO.OUT)
+		GPIO.setup(self.gpioPin,GPIO.OUT)
 			
 		self.logger.log("Starting fan, running for " + str(runtime) + " seconds")
-		GPIO.output(18, GPIO.HIGH)
+		GPIO.output(self.gpioPin, GPIO.HIGH)
+		
 		time.sleep(runtime)
+
 		self.logger.log("Stopping fan")
-		GPIO.output(18, GPIO.LOW)
+		GPIO.output(self.gpioPin, GPIO.LOW)

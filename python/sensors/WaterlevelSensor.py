@@ -3,7 +3,7 @@
 from connectors.apiconnector import ApiConnector
 from core.logger import Logger
 import time
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 class Waterlevel:
 	def __init__(self, id, serialNumber, name, type, value, min, max):
@@ -17,18 +17,17 @@ class Waterlevel:
 
 class WaterlevelSensor:
 	
+	GPIO_TRIGGER = 22
+	GPIO_ECHO    = 24
+
 	def __init__(self):
 		self.api = ApiConnector()
 		self.logger = Logger()
 
-		self.GPIO_TRIGGER = 22
-		self.GPIO_ECHO    = 24
-
-		#GPIO.setmode(GPIO.BCM)
-		
-		#GPIO.setup(self.GPIO_TRIGGER,GPIO.OUT)
-		#GPIO.setup(self.GPIO_ECHO,GPIO.IN)
-		#GPIO.output(self.GPIO_TRIGGER, False)
+		GPIO.setmode(GPIO.BCM)
+		GPIO.setup(self.GPIO_TRIGGER,GPIO.OUT)
+		GPIO.setup(self.GPIO_ECHO,GPIO.IN)
+		GPIO.output(self.GPIO_TRIGGER, False)
 
 	def readSensorValue(self):
 		numberOfPings = 10
@@ -36,25 +35,25 @@ class WaterlevelSensor:
 		result = 764340
 
 		for num in range(0, numberOfPings):
-			#print("Ping {}".format(str(num + 1)))
+			print("Ping {}".format(str(num + 1)))
 
-			#	GPIO.output(self.GPIO_TRIGGER, True)
-			#	time.sleep(0.001)
-			#	GPIO.output(self.GPIO_TRIGGER, False)
-			#	start = time.time()
+			GPIO.output(self.GPIO_TRIGGER, True)
+			time.sleep(0.001)
+			GPIO.output(self.GPIO_TRIGGER, False)
+			start = time.time()
 
-			#	while GPIO.input(self.GPIO_ECHO)==0:
-			#		start = time.time()
+			while GPIO.input(self.GPIO_ECHO)==0:
+				start = time.time()
 
-			#	while GPIO.input(self.GPIO_ECHO)==1:
-			#		stop = time.time()
+			while GPIO.input(self.GPIO_ECHO)==1:
+				stop = time.time()
 
-			#	elapsed = stop-start
+			elapsed = stop-start
 
-			#	distance = (elapsed * 34300) / 2
+			distance = (elapsed * 34300) / 2
 				
-			#	result = result + float(distance)
-			#	print(distance)
+			result = result + float(distance)
+			print(distance)
 
 			time.sleep(pingInterval)
 

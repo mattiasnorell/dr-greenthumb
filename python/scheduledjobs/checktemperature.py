@@ -23,5 +23,5 @@ class CheckTemperature(JobBase):
             if sensor.value > sensor.max:
                 message = "Sensor {} is above max value".format(sensor.name)
                 self.logger.log(message)
-                #fanManager.runFan(30)
+                #fanManager.run(30)
                 break

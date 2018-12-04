@@ -4,7 +4,7 @@ import sys
 from os.path import isfile, join
 import glob
 import os
-from providers.Settings import Settings
+from core.Settings import Settings
 from scheduledjobs.jobbase import JobBase
 
 class BackupDatabase(JobBase):

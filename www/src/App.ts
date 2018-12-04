@@ -11,4 +11,7 @@ import LogComponent from 'components/Log/Log';
 export default class App extends Vue {
     public message: string = 'test message';
 
+    public App() {
+        window.console.log('Test');
+    }
 }

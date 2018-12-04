@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*- 
 from connectors.apiconnector import ApiConnector
 from core.logger import Logger
+import RPi.GPIO as GPIO
 
 class Light:
 	def __init__(self, id, serialNumber, name, sensorType, value, min, max):
@@ -15,6 +16,8 @@ class Light:
 
 class LightSensor:
 	
+	gpioPin = 17
+
 	def __init__(self):
 		self.api = ApiConnector()
 		self.logger = Logger()
@@ -30,9 +33,9 @@ class LightSensor:
 		if result['status'] != 200:
 			return sensors
 
-		#GPIO.setmode(GPIO.BCM)
-		#GPIO.setwarnings(False)
-		#GPIO.setup(17,GPIO.IN)
+		GPIO.setmode(GPIO.BCM)
+		GPIO.setwarnings(False)
+		GPIO.setup(self.gpioPin,GPIO.IN)
 
 		for sensor in result['data']:
 			sensorId = sensor['Id']
@@ -41,10 +44,9 @@ class LightSensor:
 			sensorType = sensor['SensorType']
 			sensorMinValue = sensor['MinValue']
 			sensorMaxValue = sensor['MaxValue']
-			#value = GPIO.input(17)
-			value = 1
+			sensorValue = GPIO.input(self.gpioPin)
 
-			sensor = Light(sensorId, sensorSerialNumber, sensorName, sensorType, value, sensorMinValue, sensorMaxValue)
+			sensor = Light(sensorId, sensorSerialNumber, sensorName, sensorType, sensorValue, sensorMinValue, sensorMaxValue)
 			sensors.append(sensor)
 
 		return sensors
