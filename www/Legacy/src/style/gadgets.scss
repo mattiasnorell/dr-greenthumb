@@ -1,0 +1,221 @@
+.gadget{
+	margin-bottom: 24px;
+	float:left;
+	padding-right: 10px;
+	padding-left: 10px;
+	box-sizing: border-box;
+
+	&.gadget-size-s{
+		width: 320px;
+	}
+
+	&.gadget-size-m{
+		width: 480px;
+	}
+
+	&.gadget-size-l{
+		width: 640px;
+	}
+
+	&.gadget-size-xl{
+		width: 960px;
+	}
+
+	.gadget-header{
+		float:left;
+		position:relative;
+		width: 100%;
+		box-sizing: border-box;
+		height: 40px;
+		width: 100%;
+		line-height: 40px;
+		text-align: center;
+		color: #fff;
+		font-size: 14px;
+
+		.gadget-toggle-prev{
+			position: absolute;
+			top: 3px;
+			left: 10px;
+		}
+		
+		.gadget-toggle-next{
+			position: absolute;
+			top: 3px;
+			right: 10px;
+		}
+
+		.gadget-toggle-prev i, .gadget-toggle-next i{
+			font-size: 20px;
+			line-height: 20px;
+			color: #fff;
+			cursor: pointer;
+		}
+	}
+
+	.gadget-content{
+		color: #fff;
+		text-align: center;
+		max-height: 300px;
+		overflow: auto;
+		float: left;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 20px 20px 20px 20px;
+		min-height: 280px;
+
+		.gadget-info-tab{
+			
+
+			h2, h3{
+				text-align: center;
+			}
+			
+			.temperature{
+				font-size: 62px;
+				font-weight: 300;
+				line-height: 64px;
+				margin-bottom: 0px;
+			}
+
+			.description{
+				font-size: 14px;
+				font-weight: 300;
+				line-height: 20px;
+				margin-top: 0px;
+				margin-bottom: 20px;
+			}
+
+			table{
+				width: 100%;
+				padding: 0;
+				margin: 0;
+				border-collapse: collapse;
+
+				td{
+					font-size: 12px;
+					line-height: 20px;
+					border-bottom: 1px solid rgba(255,255,255,.5);
+
+					&:nth-child(1){
+						text-align: left;
+					}
+
+					&:nth-child(2){
+						text-align: right;
+					}
+				}
+			}
+		}
+	}
+
+	&.gadget-theme-blue{ 
+		.gadget-header{
+			background-color: #1e7c98;
+		}
+
+		.gadget-content{
+			background: rgba(37,150,184,1);
+			background: -moz-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(37,150,184,1)), color-stop(100%, rgba(67,188,217,1)));
+			background: -webkit-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: -o-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: -ms-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: linear-gradient(to bottom, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2596b8', endColorstr='#43bcd9', GradientType=0 );
+		}
+	}
+	
+	&.gadget-theme-white{
+		 .gadget-content{
+			background: #fff;
+		}
+	}
+
+	&.gadget-theme-red{
+		.gadget-header{
+			background-color: red;
+		}
+
+		.gadget-content{
+			background: rgba(37,150,184,1);
+			background: -moz-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(37,150,184,1)), color-stop(100%, rgba(67,188,217,1)));
+			background: -webkit-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: -o-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: -ms-linear-gradient(top, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			background: linear-gradient(to bottom, rgba(37,150,184,1) 0%, rgba(67,188,217,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2596b8', endColorstr='#43bcd9', GradientType=0 );
+		}
+	}
+
+	.gadget-toggles{
+		text-align: center;
+		color: #fff;
+		font-size: 12px;
+		
+		i{
+			font-size: 18px;
+		}
+
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		li{
+			float:left;
+			padding: 0;
+			margin: 0;
+			width:25%;
+			padding: 10px 0 10px 0;
+			cursor: pointer;
+
+			&:nth-child(1){
+				display: block;
+			}
+
+			&:nth-child(1) {
+				background-color: #14bad4;
+			}
+
+			&:nth-child(2) {
+				background-color: #f27835;
+			}
+
+			&:nth-child(3) {
+				background-color: #1fbba6;
+			}
+
+			&:nth-child(4) {
+				background-color: #FF9455;
+			}
+		}
+
+		ol{
+			font-size: 12px;
+			line-height: 20px;
+			padding-top: 0;
+			margin:0;
+			padding-left: 20px;
+
+			li{
+				text-align: left;
+			}
+		}
+
+		
+	}
+}
+
+
+@media screen and (max-width: 640px) {
+    .gadget.gadget-size-s,
+    .gadget.gadget-size-m,
+    .gadget.gadget-size-l,
+    .gadget.gadget-size-xl
+    {
+		width: 100%;
+	}
+}
