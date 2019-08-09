@@ -34,12 +34,31 @@ def home():
 
     return Response(routes, mimetype="text/html")
 
+@app.route('/api/v1/settings/getactive', methods=['GET'])
+def api_settings_getactive():
+    conn = sqlite3.connect('../db/greenhouse.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    sensors = cur.execute('SELECT * FROM Settings WHERE Active = 1;').fetchone()
+
+    return jsonify(sensors)
+
 @app.route('/api/v1/widgets/', methods=['GET'])
 def api_widgets():
     conn = sqlite3.connect('../db/greenhouse.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
     sensors = cur.execute('SELECT * FROM Widgets WHERE Active = 1 ORDER BY SortOrder;').fetchall()
+
+    return jsonify(sensors)
+
+@app.route('/api/v1/schedule/<scheduleId>', methods=['GET'])
+def api_schedule(scheduleId):
+    conn = sqlite3.connect('../db/greenhouse.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    query = "SELECT * FROM Schedule where BrewId = '%s'" % (scheduleId)
+    sensors = cur.execute(query).fetchall()
 
     return jsonify(sensors)
 
@@ -62,7 +81,7 @@ def api_sensors():
 
     return jsonify(sensors)
 
-@app.route('/api/v1/sensors/<int:sensorid>', methods=['GET'])
+@app.route('/api/v1/sensors/<sensorid>', methods=['GET'])
 def api_sensor(sensorid):
     
     conn = sqlite3.connect('../db/greenhouse.db')

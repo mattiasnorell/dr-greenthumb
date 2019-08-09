@@ -4,10 +4,18 @@ export default class Log extends Component {
 
     state = { data: [] };
 
-    componentDidMount(){
-        fetch('http://127.0.0.1:5000/api/v1/log?take=10')
-        .then(response => response.json())
-        .then(data => this.setState({data: data}))
+    async componentDidMount(){
+        const result = await this.getData();
+        this.setState({data: result});
+
+        setInterval(async () => {
+            const result = await this.getData();
+            this.setState({data: result});
+        }, 60000);
+    }
+
+    async getData(){
+        return fetch('http://127.0.0.1:5000/api/v1/log?take=10').then(response => response.json());
     }
 
     render() {

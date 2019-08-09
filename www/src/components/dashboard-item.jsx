@@ -9,23 +9,13 @@ import Light from './light';
 import Moisture from './moisture';
 import WaterFlow from './water-flow';
 import WaterLevel from './water-level';
+import Info from './info';
 
 export default class DashboardItem extends Component {
 
-    state = { data: [] };
-
-    async componentDidMount(){
-        
-    }
-
-    // This is a dirty hack until i fix the database ids
-    getModuleName(widgetName){
-        widgetName = widgetName.charAt(0).toUpperCase() + this.props.widget.slice(1)
-        
-        const widgetNameSplit = widgetName.split('-');
-        widgetName = widgetNameSplit.length > 1 ? widgetNameSplit[0] + widgetNameSplit[1].charAt(0).toUpperCase() + widgetNameSplit[1].slice(1) : widgetName;
-
-        return widgetName;
+    constructor(props){
+        super(props);
+        this.state = { data: [] };
     }
 
     render() {
@@ -38,21 +28,29 @@ export default class DashboardItem extends Component {
             Light,
             WaterFlow,
             Moisture,
-            WaterLevel
+            WaterLevel,
+            Info
         }
 
-        let Module = this.getModuleName(this.props.widget);
+        let Module = this.props.widget;
 
         if(!components[Module]){
-        return('');
+            return('');
         }
 
         const $component = components[Module];
 
         return (
-        <div className={"gadget gadget-size-" + this.props.size + " gadget-theme-"+ this.props.theme+ " gadget-" +this.props.id}>
-            <div className="gadget-header">{this.props.title}</div>
-            <$component />                  
+        <div className={"gadget gadget-size-" + this.props.size + " gadget-theme-"+ this.props.theme+ " gadget-id-" +this.props.id + " gadget-name-" + this.props.widget.toLowerCase()}>
+            
+            {
+                this.props.persistent === 0 && 
+                <div className="gadget-header">
+                    {this.props.title}
+                </div>
+            }
+
+            <$component/>                  
         </div>
         )
     }
