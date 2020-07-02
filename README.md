@@ -5,7 +5,7 @@ Automated greenhouse
 ## Install
 sudo apt install python3-pip git
 
-pip3 install RPi.GPIO flask flask_cors schedule yyaml picamera
+pip3 install RPi.GPIO flask flask_cors schedule pyyaml picamera
 
 ## GUI
 I use BusyBox httpd to serve the gui since it's a part of the Rasberry OS image and require zero configuration. 
